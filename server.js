@@ -5,16 +5,12 @@ const http = require('http');
 const path = require('path');
 const pkg = require('./package.json');
 
-var app = express();
-var port = process.env.PORT || 2020;
-
-app.set('version', pkg.version);
-app.set('port', port);
+const app = express();
+const port = process.env.PORT || 2020;
 
 app.use('/dist', express.static(path.resolve(__dirname, 'dist')));
-app.get('*', (req, res) => {
-  res.sendfile('index.html');
-});
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'index.html')));
 
 http.createServer(app).listen(port);
-console.log(`🎉 ${pkg.name} running on port ${port}.`);
+
+console.log(`${pkg.name} running on port ${port} 🎉`);
