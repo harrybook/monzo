@@ -5,7 +5,9 @@
 </template>
 
 <style lang="scss">
+@import '../sass/variables';
+
 body {
-  background: #eee;
+  background: $background;
 }
 </style>
