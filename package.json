@@ -1,0 +1,51 @@
+{
+  "name": "monzo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "David Gauld",
+      "email": "dcgauld@gmail.com"
+    }
+  ],
+  "scripts": {
+    "prod": "NODE_ENV=production webpack --progress",
+    "start": "node server.js",
+    "watch": "webpack --progress --watch -d"
+  },
+  "main": "server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcgauld/monzo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dcgauld/monzo/issues"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "vue": "^2.0.0-rc.4",
+    "vue-resource": "^0.9.3",
+    "vue-router": "^2.0.0-rc.3",
+    "vuex": "^2.0.0-rc.5",
+    "vuex-router-sync": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-runtime": "^6.9.2",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
+    "vue-hot-reload-api": "^1.3.2",
+    "vue-html-loader": "^1.1.0",
+    "vue-loader": "^9.4.2",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.12.12",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
