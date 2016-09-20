@@ -30,7 +30,7 @@ const config = {
   },
   vue: {
     loaders: {
-      js: 'babel!eslint?{rules:{\'eol-last\':0}}',
+      js: 'babel',
       scss: ExtractTextPlugin.extract('css!sass'),
     },
     autoprefixer: true,
