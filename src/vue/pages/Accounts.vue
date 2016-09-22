@@ -8,6 +8,7 @@
 
 <script>
 import AccountList from '../accounts/AccountList.vue';
+
 export default {
   components: {
     AccountList,
@@ -20,5 +21,5 @@ export default {
   created() {
     this.$store.dispatch('retrieveAccounts');
   },
-}
+};
 </script>

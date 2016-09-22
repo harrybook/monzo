@@ -6,17 +6,17 @@ const initialState = {
   loading: true,
 };
 
-function accountsError(state, error) {
+function transactionsError(state, error) {
   state.error = error;
   state.loading = false;
 }
 
-function accountsReceive(state, accounts) {
+function transactionsReceive(state, transactions) {
   state.loading = false;
-  state.items = accounts;
+  state.items = transactions;
 }
 
-function accountsRetrieve(state) {
+function transactionsRetrieve(state) {
   state.error = null;
   state.loading = true;
   state.items = [];
@@ -24,9 +24,9 @@ function accountsRetrieve(state) {
 
 export default {
   mutations: {
-    accountsError,
-    accountsReceive,
-    accountsRetrieve,
+    transactionsError,
+    transactionsReceive,
+    transactionsRetrieve,
   },
   state: initialState,
 };

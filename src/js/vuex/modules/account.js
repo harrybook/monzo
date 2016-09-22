@@ -1,32 +1,32 @@
 'use strict';
 
 const initialState = {
+  data: {},
   error: null,
-  items: [],
   loading: true,
 };
 
-function accountsError(state, error) {
+function accountError(state, error) {
   state.error = error;
   state.loading = false;
 }
 
-function accountsReceive(state, accounts) {
+function accountReceive(state, account) {
+  state.data = account;
   state.loading = false;
-  state.items = accounts;
 }
 
-function accountsRetrieve(state) {
+function accountRetrieve(state) {
+  state.data = {};
   state.error = null;
   state.loading = true;
-  state.items = [];
 }
 
 export default {
   mutations: {
-    accountsError,
-    accountsReceive,
-    accountsRetrieve,
+    accountError,
+    accountReceive,
+    accountRetrieve,
   },
   state: initialState,
 };

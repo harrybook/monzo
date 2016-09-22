@@ -2,10 +2,12 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Account from '../vue/pages/Account.vue';
 import Accounts from '../vue/pages/Accounts.vue';
 import Callback from '../vue/pages/Callback.vue';
 import Login from '../vue/pages/Login.vue';
 import Logout from '../vue/pages/Logout.vue';
+import Transactions from '../vue/pages/Transactions.vue';
 
 Vue.use(VueRouter);
 
@@ -30,6 +32,14 @@ const router = new VueRouter({
     { path: '/logout', component: Logout },
     { path: '/callback', component: Callback },
     { path: '/accounts', component: Accounts, beforeEnter: requireAuth },
+    {
+      path: '/account/:id',
+      component: Account,
+      beforeEnter: requireAuth,
+      children: [
+        { path: '/', component: Transactions, beforeEnter: requireAuth },
+      ],
+    },
     { path: '*', redirect: '/' },
   ],
 });
