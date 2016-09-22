@@ -4,7 +4,7 @@
       <li v-for="transaction in transactions.items">
         {{ transaction.merchant ? transaction.merchant.emoji : '' }} <router-link :to="'/transaction/' + transaction.id">{{ transaction.description }}</router-link>
         <div>
-          <strong>Amount:</strong> {{ transaction.amount }}
+          <strong>Amount:</strong> {{ transaction.amount / 100 | currency }}
         </div>
       </li>
     </ul>
