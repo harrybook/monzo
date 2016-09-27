@@ -1,21 +1,33 @@
 <template>
   <div class="c-transaction-list">
+    <pane v-if="transactions.showPane" @close="hidePane">
+      <transaction-pane @close="hidePane"></transaction-pane>
+    </pane>
     <ul>
-      <li v-for="transaction in transactions.items">
-        {{ transaction.merchant ? transaction.merchant.emoji : '' }} <router-link :to="'/transaction/' + transaction.id">{{ transaction.description }}</router-link>
-        <div>
-          <strong>Amount:</strong> {{ transaction.amount / 100 | currency }}
-        </div>
-      </li>
+      <transaction-item v-for="transaction in transactions.items" :transaction="transaction"></transaction-item>
     </ul>
   </div>
 </template>
 
 <script>
+import Pane from '../common/Pane.vue';
+import TransactionItem from './TransactionItem.vue';
+import TransactionPane from './TransactionPane.vue';
+
 export default {
+  components: {
+    Pane,
+    TransactionItem,
+    TransactionPane,
+  },
   computed: {
     transactions() {
       return this.$store.state.transactions;
+    },
+  },
+  methods: {
+    hidePane() {
+      this.$store.commit('transactionsShowPane', false);
     },
   },
 }
