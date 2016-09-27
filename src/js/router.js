@@ -37,7 +37,8 @@ const router = new VueRouter({
       component: Account,
       beforeEnter: requireAuth,
       children: [
-        { path: '/', component: Transactions, beforeEnter: requireAuth },
+        { path: '', redirect: 'transactions', beforeEnter: requireAuth },
+        { path: 'transactions', component: Transactions, beforeEnter: requireAuth },
       ],
     },
     { path: '*', redirect: '/' },
