@@ -9,7 +9,7 @@
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
-        <small v-if="transaction.is_load">+</small>{{ amount[0] }}.<small>{{ amount[1] }}</small>
+        <small v-if="transaction.is_load">+</small>{{ Math.abs(amount[0]) }}.<small>{{ amount[1] }}</small>
       </div>
     </div>
   </div>
