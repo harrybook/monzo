@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     showPane() {
+      this.$store.dispatch('retrieveTransaction', this.transaction.id);
       this.$store.commit('transactionsShowPane', true);
     },
   },

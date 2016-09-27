@@ -13,6 +13,17 @@ export function retrieveAccounts({ commit }) {
     });
 }
 
+export function retrieveBalance({ commit }, accountId) {
+  commit('balanceRetrieve');
+  api.retrieveBalance(accountId)
+    .then(response => {
+      commit('balanceReceive', response.json());
+    })
+    .catch(response => {
+      // commit('balanceError', response.data.error.message);
+    });
+}
+
 export function retrieveTransactions({ commit }, accountId) {
   commit('transactionsRetrieve');
   api.retrieveTransactions(accountId)
@@ -21,5 +32,16 @@ export function retrieveTransactions({ commit }, accountId) {
     })
     .catch(response => {
       // commit('transactionsError', response.data.error.message);
+    });
+}
+
+export function retrieveTransaction({ commit }, transactionId) {
+  commit('transactionRetrieve');
+  api.retrieveTransaction(transactionId)
+    .then(response => {
+      commit('transactionReceive', response.json().transaction);
+    })
+    .catch(response => {
+      // commit('transactionError', response.data.error.message);
     });
 }
