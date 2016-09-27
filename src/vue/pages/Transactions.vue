@@ -1,6 +1,5 @@
 <template>
   <div class="c-transactions">
-    <h1>Transactions</h1>
     <p v-if="transactions.loading">Loading...</p>
     <transaction-list v-else></transaction-list>
   </div>

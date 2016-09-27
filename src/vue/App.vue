@@ -7,7 +7,14 @@
 <style lang="scss">
 @import '../sass/variables';
 
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 16px;
+  line-height: 1.6;
+}
+
 body {
-  background: $background;
+  padding: 0;
+  margin: 0;
 }
 </style>
