@@ -7,7 +7,24 @@
         <strong>Spend today:</strong> {{ balance.data.spend_today / 100 | currency }}
       </template>
     </div>
-    <router-view></router-view>
+    <div class="grid">
+      <div class="grid__item one-half c-transaction-view">
+        <router-view></router-view>
+      </div><!--
+   --><div class="grid__item one-half">
+        <p v-if="!transaction.data">Select transaction</p>
+        <template v-else>
+          <p v-if="transaction.loading">Loading...</p>
+          <template v-else>
+            <h1>{{ title }}</h1>
+            <ul>
+              <li>{{ transaction.data.merchant ? transaction.data.merchant.emoji : '' }}</li>
+              <li><strong>Amount:</strong> {{ transaction.data.amount / 100 | currency }}</li>
+            </ul>
+          </template>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,6 +33,24 @@ export default {
   computed: {
     balance() {
       return this.$store.state.balance;
+    },
+    transaction() {
+      return this.$store.state.transaction;
+    },
+    title() {
+      if (this.transaction.is_load) {
+        return this.transaction.data.description;
+      }
+
+      if (this.transaction.data.merchant) {
+        return this.transaction.data.merchant.name;
+      }
+
+      if (this.transaction.data.counterparty) {
+        return this.transaction.data.counterparty.name;
+      }
+
+      return this.transaction.data.description;
     },
   },
   created() {
@@ -30,5 +65,9 @@ export default {
   color: #fff;
   padding: 20px;
   width: 100%;
+}
+
+.c-transaction-view {
+  border-right: 1px solid #efefef;
 }
 </style>

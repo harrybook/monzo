@@ -4,8 +4,8 @@
       <div class="c-transaction-item__image-container" :style="imageStyle"></div>
     </div>
     <div class="c-transaction-item__info">
-      <div class="c-transaction-item__title">{{ title }}</div>
-      <div v-if="transaction.notes" class="c-transaction-item__notes">{{ transaction.notes }}</div>
+      <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
+      <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.notes }}</div>
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
@@ -52,7 +52,7 @@ export default {
   methods: {
     showPane() {
       this.$store.dispatch('retrieveTransaction', this.transaction.id);
-      this.$store.commit('transactionsShowPane', true);
+      // this.$store.commit('transactionsShowPane', true);
     },
   },
   props: {
@@ -106,6 +106,7 @@ export default {
   justify-content: center;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .c-transaction-item__notes {
