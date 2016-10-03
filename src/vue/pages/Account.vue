@@ -27,11 +27,17 @@
             <p>No transaction selected</p>
           </div>
           <template v-else>
-            <h1>{{ title }}</h1>
-            <ul>
-              <li>{{ transaction.data.merchant ? transaction.data.merchant.emoji : '' }}</li>
-              <li><strong>Amount:</strong> {{ transaction.data.amount / 100 | currency }}</li>
-            </ul>
+            <div class="map" ref="map"></div>
+            <div class="c-transaction-view__image-container" :style="imageStyle">
+              <span v-if="transaction.data.is_load">+</span>
+            </div>
+            <h1 class="c-transaction-view__heading">{{ title }}</h1>
+            <p v-if="transaction.data.merchant.address" class="c-transaction-view__address">
+              <a :href="'http://maps.google.com/?ll=' + transaction.data.merchant.address.latitude + ',' + transaction.data.merchant.address.longitude" target="_blank">{{ transaction.data.merchant.address.short_formatted }}</a>
+            </p>
+            <div class="c-transaction-view__amount">
+              <currency :value="transaction.data.amount / 100" :currency="transaction.data.currency"></currency>
+            </div>
           </template>
         </template>
       </div>
@@ -67,9 +73,42 @@ export default {
 
       return this.transaction.data.description;
     },
+    imageStyle() {
+      if (!this.transaction.data.merchant) {
+        return {};
+      }
+
+      return {
+        backgroundImage: `url(${this.transaction.data.merchant.logo})`,
+      };
+    },
   },
   created() {
     this.$store.dispatch('retrieveBalance', this.$route.params.id);
+  },
+  watch: {
+    ['transaction.data']() {
+      this.$nextTick(() => {
+        if (!this.transaction.data.merchant) {
+          return;
+        }
+
+        var myLatLng = {
+          lat: this.transaction.data.merchant.address.latitude,
+          lng: this.transaction.data.merchant.address.longitude,
+        };
+
+        var map = new google.maps.Map(this.$refs.map, {
+          zoom: 14,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+        });
+      });
+    },
   },
 }
 </script>
@@ -91,11 +130,12 @@ export default {
   top: 0;
   right: 0;
   width: 50%;
-  border-left: 1px solid #ededed;
   height: 100%;
+  text-align: center;
 }
 
 .c-another-container {
+  border-right: 1px solid #e0e0e0;
   position: absolute;
   top: 105px;
   left: 0;
@@ -113,8 +153,8 @@ export default {
 }
 
 .c-account-header__amount {
-  font-size: 34px;
-  line-height: 34px;
+  font-size: 38px;
+  line-height: 38px;
   font-weight: 300;
 }
 
@@ -123,7 +163,7 @@ export default {
   font-size: 13px;
   text-transform: uppercase;
   line-height: 13px;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .c-transaction-select {
@@ -144,5 +184,49 @@ export default {
   user-select: none;
   cursor: default;
   }
+}
+
+.map {
+  width: 100%;
+  height: 200px;
+}
+
+.c-transaction-view__heading {
+  font-weight: 300;
+  font-size: 26px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  line-height: 26px;
+}
+
+.c-transaction-view__address {
+  font-size: 13px;
+}
+
+.c-transaction-view__image-container {
+  padding-top: 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  display: inline-block;
+  background-color: #ddd;
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  background-position: center;
+  background-size: cover;
+  margin-top: -25px;
+  position: relative;
+
+  .c-transaction-item--top-up & {
+    background-color: #43af7a;
+  }
+}
+
+.c-transaction-view__amount {
+  font-size: 38px;
+  line-height: 38px;
+  font-weight: 300;
+  margin-top: 30px;
 }
 </style>

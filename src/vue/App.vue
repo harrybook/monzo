@@ -26,4 +26,8 @@ body {
   padding: 0;
   margin: 0;
 }
+
+p {
+  margin: 0 0 20px;
+}
 </style>
