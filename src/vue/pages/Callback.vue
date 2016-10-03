@@ -14,8 +14,8 @@ export default {
 
     this.$http.get(`/token?code=${code}`)
       .then(response => {
-        localStorage.setItem('accessToken', response.json().access_token);
-        localStorage.setItem('refreshToken', response.json().refresh_token);
+        localStorage.setItem('accessToken', response.body.access_token);
+        localStorage.setItem('refreshToken', response.body.refresh_token);
         this.$router.push('/accounts');
       })
       .catch(error => {
