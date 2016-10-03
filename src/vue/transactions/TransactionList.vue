@@ -64,7 +64,7 @@ export default {
 <style lang="scss">
 .c-transaction-list__date {
   background: #f9f9f9;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #ededed;
   text-transform: uppercase;
   padding: 10px 20px;
 }

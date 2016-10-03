@@ -36,7 +36,7 @@ export function retrieveTransactions({ commit }, accountId) {
 }
 
 export function retrieveTransaction({ commit }, transactionId) {
-  commit('transactionRetrieve');
+  commit('transactionRetrieve', transactionId);
   api.retrieveTransaction(transactionId)
     .then(response => {
       commit('transactionReceive', response.body.transaction);

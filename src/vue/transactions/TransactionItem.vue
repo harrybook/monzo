@@ -1,7 +1,9 @@
 <template>
-  <div @click.prevent="showPane" class="c-transaction-item" :class="{ 'c-transaction-item--top-up': transaction.is_load }">
+  <div @click.prevent="showPane" class="c-transaction-item" :class="{ 'c-transaction-item--top-up': transaction.is_load, 'c-transaction-item--selected': currentTransaction.id === transaction.id }">
     <div class="c-transaction-item__image">
-      <div class="c-transaction-item__image-container" :style="imageStyle"></div>
+      <div class="c-transaction-item__image-container" :style="imageStyle">
+        <span v-if="transaction.is_load">+</span>
+      </div>
     </div>
     <div class="c-transaction-item__info">
       <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
@@ -10,7 +12,14 @@
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
-        <small v-if="transaction.is_load">+</small>{{ Math.abs(amount[0]) }}.<small>{{ amount[1] }}</small>
+        <div class="c-transaction-item__amount-main">
+          <currency :value="transaction.amount / 100" split sign></currency>
+        </div>
+        <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">
+          <currency :value="transaction.local_amount / 100" :currency="transaction.local_currency"></currency>
+        </div>
+        <!-- <small v-if="transaction.is_load">+</small>{{ Math.abs(amount[0]) }}.<small>{{ amount[1] }}</small> -->
+        <!-- <span v-if="transaction.local_amount !== transaction.amount"><br><small>{{ transaction.local_amount / 100 | currency }}</small></span> -->
       </div>
     </div>
   </div>
@@ -18,8 +27,13 @@
 
 <script>
 import { currency } from '../../js/filters';
+import currencies from '../../js/currencies';
+import Currency from '../common/Currency.vue';
 
 export default {
+  components: {
+    Currency,
+  },
   computed: {
     amount() {
       const amount = currency(this.transaction.amount / 100);
@@ -41,7 +55,8 @@ export default {
 
       switch (this.transaction.decline_reason) {
         case 'INSUFFICIENT_FUNDS':
-          return `you didn\'t have ${currency(this.transaction.amount / 100)}`;
+          const symbol = currencies[this.transaction.currency] ? currencies[this.transaction.currency].symbol : '';
+          return `you didn\'t have ${symbol}${currency(Math.abs(this.transaction.amount / 100))}`;
         default:
           return '';
       }
@@ -60,6 +75,9 @@ export default {
       }
 
       return this.transaction.description;
+    },
+    currentTransaction() {
+      return this.$store.state.transaction.data;
     },
   },
   methods: {
@@ -80,26 +98,31 @@ export default {
 <style lang="scss">
 .c-transaction-item {
   cursor: pointer;
-  padding: 15px 20px;
-  border-bottom: 1px solid #efefef;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ededed;
   display: flex;
   background: #fff;
 
-  &:hover {
+  &:hover,
+  &:active {
     background: #f9f9f9;
   }
+}
 
-  &:active {
-    background: #f5f5f5;
-  }
+.c-transaction-item--selected {
+  background: #f9f9f9;
 }
 
 .c-transaction-item__image {
   line-height: 0;
-  padding: 5px 0;
+  padding: 10px 0;
 }
 
 .c-transaction-item__image-container {
+  padding-top: 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
   display: inline-block;
   background-color: #ddd;
   width: 35px;
@@ -133,19 +156,27 @@ export default {
 }
 
 .c-transaction-item__amount {
-  font-weight: 300;
-  font-size: 26px;
   justify-content: center;
   display: flex;
   flex-direction: column;
+  text-align: right;
+}
 
-  small {
-    font-size: 16px;
-  }
+.c-transaction-item__amount-main {
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 26px;
 
   .c-transaction-item--top-up & {
     color: #43af7a;
   }
+}
+
+.c-transaction-item__amount-local {
+  color: #bbb;
+  font-size: 13px;
+  line-height: 13px;
+  margin-top: 6px;
 }
 
 .c-transaction-item__amount-container {

@@ -2,11 +2,16 @@
   <div class="c-transaction-pane">
     <p v-if="transaction.loading">Loading...</p>
     <template v-else>
-      <h1>{{ title }}</h1>
-      <ul>
-        <li>{{ transaction.data.merchant ? transaction.data.merchant.emoji : '' }}</li>
-        <li><strong>Amount:</strong> {{ transaction.data.amount / 100 | currency }}</li>
-      </ul>
+      <template v-if="!transaction.data.id">
+        Select a transaction
+      </template>
+      <template v-else>
+        <h1>{{ title }}</h1>
+        <ul>
+          <li>{{ transaction.data.merchant ? transaction.data.merchant.emoji : '' }}</li>
+          <li><strong>Amount:</strong> {{ transaction.data.amount / 100 | currency }}</li>
+        </ul>
+      </template>
     </template>
   </div>
 </template>

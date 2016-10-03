@@ -3,7 +3,7 @@
 const initialState = {
   data: {},
   error: null,
-  loading: true,
+  loading: false,
 };
 
 function transactionError(state, error) {
@@ -16,8 +16,10 @@ function transactionReceive(state, transaction) {
   state.loading = false;
 }
 
-function transactionRetrieve(state) {
-  state.data = {};
+function transactionRetrieve(state, transactionId) {
+  state.data = {
+    id: transactionId,
+  };
   state.error = null;
   state.loading = true;
 }
