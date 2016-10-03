@@ -6,6 +6,7 @@
     <div class="c-transaction-item__info">
       <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
       <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.notes }}</div>
+      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">Declined<template v-if="declinedReason">, {{ declinedReason }}</template></div>
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
@@ -32,6 +33,18 @@ export default {
       return {
         backgroundImage: `url(${this.transaction.merchant.logo})`,
       };
+    },
+    declinedReason() {
+      if (!this.transaction.decline_reason) {
+        return;
+      }
+
+      switch (this.transaction.decline_reason) {
+        case 'INSUFFICIENT_FUNDS':
+          return `you didn\'t have ${currency(this.transaction.amount / 100)}`;
+        default:
+          return '';
+      }
     },
     title() {
       if (this.transaction.is_load) {
@@ -111,6 +124,11 @@ export default {
 
 .c-transaction-item__notes {
   color: #bbb;
+  font-size: 13px;
+}
+
+.c-transaction-item__error {
+  color: #c00;
   font-size: 13px;
 }
 
