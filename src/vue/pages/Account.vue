@@ -23,7 +23,9 @@
    --><div class="c-transaction-view">
         <p v-if="transaction.loading">Loading...</p>
         <template v-else>
-          <p v-if="!transaction.data.id">Select transaction</p>
+          <div v-if="!transaction.data.id" class="c-transaction-select">
+            <p>No transaction selected</p>
+          </div>
           <template v-else>
             <h1>{{ title }}</h1>
             <ul>
@@ -81,7 +83,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100px;
+  height: 105px;
 }
 
 .c-transaction-view {
@@ -95,7 +97,7 @@ export default {
 
 .c-another-container {
   position: absolute;
-  top: 100px;
+  top: 105px;
   left: 0;
   width: 100%;
   bottom: 0;
@@ -121,6 +123,26 @@ export default {
   font-size: 13px;
   text-transform: uppercase;
   line-height: 13px;
-  margin-top: 7px;
+  margin-top: 10px;
+}
+
+.c-transaction-select {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  p {
+    font-size: 26px;
+    font-weight: 300;
+    color: #bbb;
+    margin: 0;
+    -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  }
 }
 </style>
