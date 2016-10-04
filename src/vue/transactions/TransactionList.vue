@@ -1,8 +1,5 @@
 <template>
   <div class="c-transaction-list">
-    <pane v-if="transactions.showPane" @close="hidePane">
-      <transaction-pane @close="hidePane"></transaction-pane>
-    </pane>
     <div class="c-transaction-list__list">
       <div v-for="(items, date) in groupedTransactions" class="c-transaction-list__group">
         <div class="c-transaction-list__date">{{ formatDate(date) }}</div>
@@ -16,15 +13,11 @@
 
 <script>
 import _ from 'lodash';
-import Pane from '../common/Pane.vue';
 import TransactionItem from './TransactionItem.vue';
-import TransactionPane from './TransactionPane.vue';
 
 export default {
   components: {
-    Pane,
     TransactionItem,
-    TransactionPane,
   },
   computed: {
     transactions() {
@@ -44,21 +37,20 @@ export default {
         date.setMilliseconds(0);
         return date.getTime();
       });
-    }
+    },
   },
   methods: {
     formatDate(date) {
       date = new Date(parseInt(date, 10));
       const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      console.log(date);
       return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
     },
     hidePane() {
       this.$store.commit('transactionsShowPane', false);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

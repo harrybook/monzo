@@ -27,6 +27,11 @@ body {
   margin: 0;
 }
 
+a {
+  color: #4AB8DE;
+  text-decoration: none;
+}
+
 p {
   margin: 0 0 20px;
 }
