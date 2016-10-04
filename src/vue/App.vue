@@ -10,10 +10,10 @@
 @import '../sass/utilities';
 
 html {
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
   line-height: 1.6;
-  box-sizing: border-box;
 }
 
 *,
@@ -23,8 +23,8 @@ html {
 }
 
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 a {
