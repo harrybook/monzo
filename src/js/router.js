@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 
 function requireAuth(route, redirect, next) {
   if (!localStorage.accessToken) {
-    return redirect({
+    return next({
       path: '/login',
       // query: { to: route.fullPath },
     });
