@@ -5,6 +5,8 @@
 </template>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transaction-select {
   display: flex;
   flex-direction: column;
@@ -13,7 +15,7 @@
   text-align: center;
 
   p {
-    color: #bbb;
+    color: $silver;
     cursor: default;
     font-size: 26px;
     font-weight: 300;

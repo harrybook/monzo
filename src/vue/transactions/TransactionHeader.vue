@@ -33,9 +33,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transaction-header {
-  background: #14233c;
-  color: #fff;
+  background: $big-stone;
+  color: $white;
   height: 105px;
   left: 0;
   padding: 20px;

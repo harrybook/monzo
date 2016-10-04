@@ -54,9 +54,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transaction-list__date {
-  background: #f9f9f9;
-  border-bottom: 1px solid #ededed;
+  background: $alabaster;
+  border-bottom: 1px solid $gallery;
   text-transform: uppercase;
   padding: 10px 20px;
 }

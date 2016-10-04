@@ -34,6 +34,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transactions__container {
   height: 100%;
   left: 0;
@@ -43,7 +45,7 @@ export default {
 }
 
 .c-transactions__list {
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid $gallery;
   bottom: 0;
   left: 0;
   overflow-y: auto;

@@ -96,21 +96,23 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transaction-item {
   cursor: pointer;
   padding: 10px 20px;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid $gallery;
   display: flex;
-  background: #fff;
+  background: $white;
 
   &:hover,
   &:active {
-    background: #f9f9f9;
+    background: $alabaster;
   }
 }
 
 .c-transaction-item--selected {
-  background: #f9f9f9;
+  background: $alabaster;
 }
 
 .c-transaction-item__image {
@@ -121,10 +123,10 @@ export default {
 .c-transaction-item__image-container {
   padding-top: 16px;
   text-align: center;
-  color: #fff;
+  color: $white;
   font-size: 20px;
   display: inline-block;
-  background-color: #ddd;
+  background-color: $gallery;
   width: 35px;
   height: 35px;
   border-radius: 8px;
@@ -132,7 +134,7 @@ export default {
   background-size: cover;
 
   .c-transaction-item--top-up & {
-    background-color: #43af7a;
+    background-color: $ocean-green;
   }
 }
 
@@ -146,12 +148,12 @@ export default {
 }
 
 .c-transaction-item__notes {
-  color: #bbb;
+  color: $silver;
   font-size: 13px;
 }
 
 .c-transaction-item__error {
-  color: #c00;
+  color: $guardsman-red;
   font-size: 13px;
 }
 
@@ -168,12 +170,12 @@ export default {
   line-height: 26px;
 
   .c-transaction-item--top-up & {
-    color: #43af7a;
+    color: $ocean-green;
   }
 }
 
 .c-transaction-item__amount-local {
-  color: #bbb;
+  color: $silver;
   font-size: 13px;
   line-height: 13px;
   margin-top: 6px;

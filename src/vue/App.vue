@@ -28,7 +28,7 @@ body {
 }
 
 a {
-  color: #4AB8DE;
+  color: $picton-blue;
   text-decoration: none;
 }
 

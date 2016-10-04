@@ -84,6 +84,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../sass/variables';
+
 .c-transaction-info {
   height: 100%;
 }
@@ -108,10 +110,10 @@ export default {
 .c-transaction-info__image-container {
   padding-top: 16px;
   text-align: center;
-  color: #fff;
+  color: $white;
   font-size: 20px;
   display: inline-block;
-  background-color: #ddd;
+  background-color: $gallery;
   width: 70px;
   height: 70px;
   border-radius: 16px;
