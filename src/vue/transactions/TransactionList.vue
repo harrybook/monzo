@@ -1,10 +1,16 @@
 <template>
   <div class="c-transaction-list">
     <div class="c-transaction-list__list">
-      <div v-for="(items, date) in groupedTransactions" class="c-transaction-list__group">
+      <div
+        v-for="(items, date) in groupedTransactions"
+        class="c-transaction-list__group"
+      >
         <div class="c-transaction-list__date">{{ formatDate(date) }}</div>
         <div class="c-transaction-list__transactions">
-          <transaction-item v-for="transaction in items" :transaction="transaction"></transaction-item>
+          <transaction-item
+            v-for="transaction in items"
+            :transaction="transaction"
+          />
         </div>
       </div>
     </div>
@@ -13,6 +19,7 @@
 
 <script>
 import _ from 'lodash';
+import moment from 'moment';
 import TransactionItem from './TransactionItem.vue';
 
 export default {
@@ -20,34 +27,23 @@ export default {
     TransactionItem,
   },
   computed: {
-    transactions() {
-      return this.$store.state.transactions;
+    groupedTransactions() {
+      return _.groupBy(this.sortedTransactions, transaction => {
+        return moment(transaction.created).startOf('day').valueOf();
+      });
     },
     sortedTransactions() {
       return _.sortBy(this.transactions.items, transaction => {
-        return new Date(transaction.created).getTime();
+        return moment(transaction.created).valueOf();
       }).reverse();
     },
-    groupedTransactions() {
-      return _.groupBy(this.sortedTransactions, transaction => {
-        const date = new Date(transaction.created);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        return date.getTime();
-      });
+    transactions() {
+      return this.$store.state.transactions;
     },
   },
   methods: {
-    formatDate(date) {
-      date = new Date(parseInt(date, 10));
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
-    },
-    hidePane() {
-      this.$store.commit('transactionsShowPane', false);
+    formatDate(value) {
+      return moment(value, 'x').format('dddd, D MMMM');
     },
   },
 };

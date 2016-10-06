@@ -1,5 +1,5 @@
 <template>
-  <div @click.prevent="showPane" class="c-transaction-item" :class="{ 'c-transaction-item--top-up': transaction.is_load, 'c-transaction-item--selected': currentTransaction.id === transaction.id }">
+  <div @click.prevent="showTransaction" class="c-transaction-item" :class="classes">
     <div class="c-transaction-item__image">
       <div class="c-transaction-item__image-container" :style="imageStyle">
         <span v-if="transaction.is_load">+</span>
@@ -8,7 +8,9 @@
     <div class="c-transaction-item__info">
       <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
       <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.notes }}</div>
-      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">Declined<template v-if="declinedReason">, {{ declinedReason }}</template></div>
+      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">
+        Declined<template v-if="declinedReason">, {{ declinedReason }}</template>
+      </div>
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
@@ -18,8 +20,6 @@
         <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">
           <currency :value="transaction.local_amount / 100" :currency="transaction.local_currency"></currency>
         </div>
-        <!-- <small v-if="transaction.is_load">+</small>{{ Math.abs(amount[0]) }}.<small>{{ amount[1] }}</small> -->
-        <!-- <span v-if="transaction.local_amount !== transaction.amount"><br><small>{{ transaction.local_amount / 100 | currency }}</small></span> -->
       </div>
     </div>
   </div>
@@ -35,6 +35,12 @@ export default {
     Currency,
   },
   computed: {
+    classes() {
+      return {
+        'c-transaction-item--top-up': this.transaction.is_load,
+        'c-transaction-item--selected': this.currentTransaction.id === this.transaction.id,
+      };
+    },
     amount() {
       const amount = currency(this.transaction.amount / 100);
       return (amount + '').split('.');
@@ -81,7 +87,7 @@ export default {
     },
   },
   methods: {
-    showPane() {
+    showTransaction() {
       this.$store.dispatch('retrieveTransaction', this.transaction.id);
       // this.$store.commit('transactionsShowPane', true);
     },
@@ -105,9 +111,12 @@ export default {
   display: flex;
   background: $white;
 
-  &:hover,
-  &:active {
+  &:hover {
     background: $alabaster;
+  }
+
+  &:active {
+    background: darken($alabaster, 1);
   }
 }
 
