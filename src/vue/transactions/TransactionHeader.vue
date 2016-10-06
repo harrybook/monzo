@@ -1,6 +1,6 @@
 <template>
   <div class="c-transaction-header">
-    <p v-if="balance.loading">Loading...</p>
+    <loader v-if="balance.loading"></loader>
     <div v-else class="grid">
       <div class="c-transaction-header__amount grid__item one-half">
         <currency :value="balance.data.balance / 100" split :currency="balance.data.currency"></currency>
@@ -16,10 +16,12 @@
 
 <script>
 import Currency from '../common/Currency.vue';
+import Loader from '../common/Loader.vue';
 
 export default {
   components: {
     Currency,
+    Loader,
   },
   computed: {
     balance() {

@@ -1,17 +1,19 @@
 <template>
   <div class="c-accounts">
     <h1>Accounts</h1>
-    <p v-if="accounts.loading">Loading...</p>
+    <loader v-if="accounts.loading"></loader>
     <account-list v-else></account-list>
   </div>
 </template>
 
 <script>
 import AccountList from '../accounts/AccountList.vue';
+import Loader from '../common/Loader.vue';
 
 export default {
   components: {
     AccountList,
+    Loader,
   },
   computed: {
     accounts() {

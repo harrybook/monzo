@@ -3,7 +3,7 @@
     <div class="c-transactions__container">
       <transaction-header></transaction-header>
       <div class="c-transactions__list">
-        <p v-if="transactions.loading">Loading...</p>
+        <loader v-if="transactions.loading"></loader>
         <transaction-list v-else></transaction-list>
       </div>
     </div>
@@ -15,9 +15,11 @@
 import TransactionHeader from '../transactions/TransactionHeader.vue';
 import TransactionDetail from '../transactions/TransactionDetail.vue';
 import TransactionList from '../transactions/TransactionList.vue';
+import Loader from '../common/Loader.vue';
 
 export default {
   components: {
+    Loader,
     TransactionHeader,
     TransactionDetail,
     TransactionList,

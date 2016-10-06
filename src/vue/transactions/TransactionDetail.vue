@@ -1,15 +1,17 @@
 <template>
   <div class="c-transaction-detail">
-    <p v-if="transaction.loading">Loading...</p>
+    <loader v-if="transaction.loading"></loader>
     <transaction-info v-else></transaction-info>
   </div>
 </template>
 
 <script>
+import Loader from '../common/Loader.vue';
 import TransactionInfo from './TransactionInfo.vue';
 
 export default {
   components: {
+    Loader,
     TransactionInfo,
   },
   computed: {
