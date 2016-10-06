@@ -1,13 +1,13 @@
 <template>
   <div class="c-transaction-header">
-    <loader v-if="balance.loading"></loader>
+    <loader v-if="balance.loading" />
     <div v-else class="grid">
       <div class="c-transaction-header__amount grid__item one-half">
-        <currency :value="balance.data.balance / 100" split :currency="balance.data.currency"></currency>
+        <currency :value="balance.data.balance / 100" :currency="balance.data.currency" split />
         <div class="c-transaction-header__tag">Card balance</div>
       </div><!--
    --><div class="c-transaction-header__amount grid__item one-half u-text-align-right">
-        <currency :value="balance.data.spend_today / 100" split :currency="balance.data.currency"></currency>
+        <currency :value="balance.data.spend_today / 100" :currency="balance.data.currency" split />
         <div class="c-transaction-header__tag">Spent today</div>
       </div>
     </div>
@@ -47,6 +47,7 @@ export default {
   top: 0;
   width: 100%;
 }
+
 .c-transaction-header__amount {
   font-size: 38px;
   font-weight: 300;

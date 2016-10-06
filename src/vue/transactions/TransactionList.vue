@@ -1,16 +1,10 @@
 <template>
   <div class="c-transaction-list">
     <div class="c-transaction-list__list">
-      <div
-        v-for="(items, date) in groupedTransactions"
-        class="c-transaction-list__group"
-      >
+      <div v-for="(items, date) in groupedTransactions" class="c-transaction-list__group">
         <div class="c-transaction-list__date">{{ formatDate(date) }}</div>
         <div class="c-transaction-list__transactions">
-          <transaction-item
-            v-for="transaction in items"
-            :transaction="transaction"
-          />
+          <transaction-item v-for="transaction in items" :transaction="transaction" />
         </div>
       </div>
     </div>

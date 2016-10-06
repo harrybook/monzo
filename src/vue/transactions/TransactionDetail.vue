@@ -1,7 +1,7 @@
 <template>
   <div class="c-transaction-detail">
-    <loader v-if="transaction.loading"></loader>
-    <transaction-info v-else></transaction-info>
+    <loader v-if="transaction.loading" />
+    <transaction-info v-else />
   </div>
 </template>
 
