@@ -1,5 +1,6 @@
 'use strict';
 
+const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
@@ -41,7 +42,7 @@ const config = {
       js: 'babel',
       scss: ExtractTextPlugin.extract('css!sass'),
     },
-    autoprefixer: true,
+    postcss: [autoprefixer()],
   },
   plugins: [
     new ExtractTextPlugin('../css/app.css'),

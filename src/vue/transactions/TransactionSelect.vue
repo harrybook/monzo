@@ -21,9 +21,6 @@
     font-weight: 300;
     margin: 0;
     user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
   }
 }
 </style>

@@ -24,6 +24,7 @@
     "url": "https://github.com/dcgauld/monzo/issues"
   },
   "dependencies": {
+    "autoprefixer": "^6.5.0",
     "currency-formatter": "^1.0.4",
     "express": "^4.13.3",
     "lodash": "^4.16.4",
