@@ -1,32 +1,33 @@
-'use strict';
-
-const config = require('./config');
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const pkg = require('./package.json');
 const request = require('superagent');
+const config = require('./config');
+const pkg = require('./package.json');
 
 const app = express();
 const port = process.env.PORT || 2020;
 
 app.get('/token', (req, res) => {
+  const grantType = req.query.grant_type || 'authorization_code';
+  const tokenType = grantType === 'refresh_token' ? 'refresh_token' : 'code';
+  const token = grantType === 'refresh_token' ? req.query.refresh_token : req.query.code;
   request
-    .post('https://api.getmondo.co.uk/oauth2/token')
+    .post('https://api.monzo.com/oauth2/token')
     .type('form')
     .send({
-      grant_type: 'authorization_code',
+      grant_type: grantType,
       client_id: config.client.id,
       client_secret: config.client.secret,
       redirect_uri: config.client.redirectUri,
-      code: req.query.code,
+      [tokenType]: token,
     })
     .end((error, response) => {
       if (error || response.statusCode !== 200) {
-        return console.log('Error', error);
+        // TODO Handle error.
       }
 
-      res.json(response.body);
+      return res.json(response.body);
     });
 });
 
