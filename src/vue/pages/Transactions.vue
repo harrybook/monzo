@@ -52,7 +52,7 @@ export default {
   left: 0;
   overflow-y: auto;
   position: absolute;
-  top: 105px;
+  top: 100px;
   width: 100%;
 }
 </style>
