@@ -39,8 +39,8 @@ export default {
 
       switch (this.transaction.decline_reason) {
         case 'INSUFFICIENT_FUNDS': {
-          const amount = currency(Math.abs(this.transaction.amount / 100, this.transaction.currency));
-          return `you didn\'t have ${amount}`;
+          const { amount, currency: code } = this.transaction;
+          return `you didn\'t have ${currency(Math.abs(amount / 100, code))}`;
         }
 
         default: {
