@@ -6,4 +6,7 @@
     "node": true
   },
   "plugins": ["html"],
+  "globals": {
+    "google": true
+  }
 }
