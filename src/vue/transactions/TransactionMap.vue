@@ -14,7 +14,10 @@ export default {
       };
       this.map = new google.maps.Map(this.$refs.map, {
         center: position,
+        disableDefaultUI: true,
+        scrollwheel: false,
         zoom: this.zoom,
+        zoomControl: true,
       });
       this.marker = new google.maps.Marker({
         map: this.map,
