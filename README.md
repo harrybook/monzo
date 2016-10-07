@@ -2,12 +2,19 @@
 
 A simple web interface for [Monzo](http://monzo.com).
 
-## Installation
+## Features
 
-Whilst in beta, you'll need to create an application in Monzo's developer dashboard to use this application.
+* Simple transaction list-detail view.
+* Google Maps integration.
+* Additional information supported (declines, notes etc).
+* Support for foreign payments.
+* Keeps you logged in using refresh tokens.
+
+## Install
+
+Whilst Monzo is in beta, you'll need to create an application in [Monzo's developer dashboard](#) to use this application.
 
 * Clone this repository.
-* Duplicate `config.sample.js` and update keys.
 * Run `npm install`.
-* Run `npm run build`.
-* Run `npm start` to start the server.
+* Rename `config.sample.js` to `config.js` and update with [your keys](#).
+* Run `npm start`.
