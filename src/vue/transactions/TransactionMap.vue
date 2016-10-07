@@ -39,7 +39,7 @@ export default {
       required: true,
     },
     zoom: {
-      default: 14,
+      default: 12,
       type: Number,
     },
   },
