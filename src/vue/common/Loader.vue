@@ -15,17 +15,13 @@ $circles: 12;
 $duration: 1s;
 
 .c-loader {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
   padding: 0 20px;
   text-align: center;
-  height: 100%;
-  display: table;
   width: 100%;
-
-  .container {
-    // TODO use flexbox
-    display: table-cell;
-    vertical-align: middle;
-  }
 }
 
 .c-loader__circles {
