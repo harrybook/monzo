@@ -1,12 +1,10 @@
 <template>
-  <div class="c-callback">
-    <!-- Nothing to see here... -->
-  </div>
+  <div class="c-callback"></div>
 </template>
 
 <script>
 export default {
-  mounted() {
+  created() {
     const code = this.$route.query.code;
     if (!code) {
       // TODO Do something.

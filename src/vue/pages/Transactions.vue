@@ -1,13 +1,13 @@
 <template>
   <div class="c-transactions">
     <div class="c-transactions__container">
-      <transaction-header></transaction-header>
+      <transaction-header />
       <div class="c-transactions__list">
-        <loader v-if="transactions.loading"></loader>
-        <transaction-list v-else></transaction-list>
+        <loader v-if="transactions.loading" />
+        <transaction-list v-else />
       </div>
     </div>
-    <transaction-detail></transaction-detail>
+    <transaction-detail />
   </div>
 </template>
 

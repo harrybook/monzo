@@ -1,8 +1,8 @@
 <template>
   <div class="c-accounts">
     <h1>Accounts</h1>
-    <loader v-if="accounts.loading"></loader>
-    <account-list v-else></account-list>
+    <loader v-if="accounts.loading" />
+    <account-list v-else />
   </div>
 </template>
 
