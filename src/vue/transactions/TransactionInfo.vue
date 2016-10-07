@@ -11,19 +11,17 @@
         <a :href="'http://maps.google.com/?ll=' + transaction.data.merchant.address.latitude + ',' + transaction.data.merchant.address.longitude" target="_blank">{{ transaction.data.merchant.address.short_formatted }}</a>
       </p>
       <div class="c-transaction-info__amount">
-        <currency :value="transaction.data.amount / 100" :currency="transaction.data.currency"></currency>
+        {{ transaction.data.amount / 100 | currency(transaction.data.currency) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Currency from '../common/Currency.vue';
 import TransactionSelect from './TransactionSelect.vue';
 
 export default {
   components: {
-    Currency,
     TransactionSelect,
   },
   computed: {

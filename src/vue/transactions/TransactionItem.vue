@@ -15,10 +15,10 @@
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
         <div class="c-transaction-item__amount-main">
-          <currency :value="transaction.amount / 100" split sign></currency>
+          {{ transaction.amount / 100 | currency }}
         </div>
         <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">
-          <currency :value="transaction.local_amount / 100" :currency="transaction.local_currency"></currency>
+          {{ transaction.local_amount / 100 | currency(transaction.local_currency) }}
         </div>
       </div>
     </div>
@@ -27,23 +27,14 @@
 
 <script>
 import { currency } from '../../js/filters';
-import currencies from '../../js/currencies';
-import Currency from '../common/Currency.vue';
 
 export default {
-  components: {
-    Currency,
-  },
   computed: {
     classes() {
       return {
         'c-transaction-item--top-up': this.transaction.is_load,
         'c-transaction-item--selected': this.currentTransaction.id === this.transaction.id,
       };
-    },
-    amount() {
-      const amount = currency(this.transaction.amount / 100);
-      return (amount + '').split('.');
     },
     imageStyle() {
       if (!this.transaction.merchant) {
@@ -60,11 +51,14 @@ export default {
       }
 
       switch (this.transaction.decline_reason) {
-        case 'INSUFFICIENT_FUNDS':
-          const symbol = currencies[this.transaction.currency] ? currencies[this.transaction.currency].symbol : '';
-          return `you didn\'t have ${symbol}${currency(Math.abs(this.transaction.amount / 100))}`;
-        default:
+        case 'INSUFFICIENT_FUNDS': {
+          const amount = currency(Math.abs(this.transaction.amount / 100, this.transaction.currency));
+          return `you didn\'t have ${amount}`;
+        }
+
+        default: {
           return '';
+        }
       }
     },
     title() {
@@ -175,8 +169,8 @@ export default {
 
 .c-transaction-item__amount-main {
   font-weight: 300;
-  font-size: 26px;
-  line-height: 26px;
+  font-size: 22px;
+  line-height: 22px;
 
   .c-transaction-item--top-up & {
     color: $ocean-green;
@@ -187,7 +181,7 @@ export default {
   color: $silver;
   font-size: 13px;
   line-height: 13px;
-  margin-top: 6px;
+  margin-top: 11px;
 }
 
 .c-transaction-item__amount-container {

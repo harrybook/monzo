@@ -24,7 +24,10 @@
     "url": "https://github.com/dcgauld/monzo/issues"
   },
   "dependencies": {
+    "currency-formatter": "^1.0.4",
     "express": "^4.13.3",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
     "superagent": "^2.2.0",
     "vue": "^2.0.1",
     "vue-loader": "^9.5.1",
