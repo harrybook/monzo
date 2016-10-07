@@ -2,7 +2,7 @@
   <div class="c-transaction-info">
     <transaction-select v-if="!transaction.data.id"></transaction-select>
     <div v-else class="c-transaction-info__details">
-      <div class="c-transaction-info__map" ref="map"></div>
+      <transaction-map v-if="transaction.data.merchant" :latitude="transaction.data.merchant.address.latitude" :longitude="transaction.data.merchant.address.longitude" />
       <div class="c-transaction-info__image-container" :style="imageStyle">
         <span v-if="transaction.data.is_load">+</span>
       </div>
@@ -19,10 +19,12 @@
 
 <script>
 import TransactionSelect from './TransactionSelect.vue';
+import TransactionMap from './TransactionMap.vue';
 
 export default {
   components: {
     TransactionSelect,
+    TransactionMap,
   },
   computed: {
     transaction() {
@@ -53,34 +55,6 @@ export default {
       };
     },
   },
-  watch: {
-    'transaction.data': function() {
-      this.$nextTick(() => {
-        let latitude;
-        let longitude;
-        let map;
-        if (!this.transaction.data.merchant) {
-          return;
-        }
-
-        ({ latitude, longitude } = this.transaction.data.merchant.address);
-        map = new google.maps.Map(this.$refs.map, {
-          center: {
-            lat: latitude,
-            lng: longitude,
-          },
-          zoom: 14,
-        });
-        new google.maps.Marker({
-          map: map,
-          position: {
-            lat: latitude,
-            lng: longitude,
-          },
-        });
-      });
-    },
-  },
 };
 </script>
 
@@ -89,11 +63,6 @@ export default {
 
 .c-transaction-info {
   height: 100%;
-}
-
-.c-transaction-info__map {
-  width: 100%;
-  height: 200px;
 }
 
 .c-transaction-info__heading {
