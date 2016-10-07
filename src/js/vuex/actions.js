@@ -1,4 +1,4 @@
-import * as api from '../services/api';
+import * as api from '../api';
 
 export function retrieveAccounts({ commit }) {
   commit('accountsRetrieve');

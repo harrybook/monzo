@@ -56,7 +56,7 @@ export default {
     },
     declinedReason() {
       if (!this.transaction.decline_reason) {
-        return;
+        return false;
       }
 
       switch (this.transaction.decline_reason) {
@@ -98,7 +98,7 @@ export default {
       type: Object,
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

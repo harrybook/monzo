@@ -1,21 +1,18 @@
-'use strict';
-
 import { sync } from 'vuex-router-sync';
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-import App from '../vue/App.vue';
-import config from '../../config';
+import { handleError, handleToken } from './session';
 import * as filters from './filters';
+import App from '../vue/App.vue';
 import router from './router';
 import store from './vuex/store';
 
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key]);
-});
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]));
 
 Vue.use(VueResource);
 
-Vue.http.options.root = config.api.url;
+Vue.http.interceptors.push(handleToken);
+Vue.http.interceptors.push(handleError);
 
 sync(store, router);
 

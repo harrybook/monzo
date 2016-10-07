@@ -56,26 +56,29 @@ export default {
     },
   },
   watch: {
-    ['transaction.data']() {
-      console.log('hi');
+    'transaction.data': function() {
       this.$nextTick(() => {
+        let latitude;
+        let longitude;
+        let map;
         if (!this.transaction.data.merchant) {
           return;
         }
 
-        var myLatLng = {
-          lat: this.transaction.data.merchant.address.latitude,
-          lng: this.transaction.data.merchant.address.longitude,
-        };
-
-        var map = new google.maps.Map(this.$refs.map, {
+        ({ latitude, longitude } = this.transaction.data.merchant.address);
+        map = new google.maps.Map(this.$refs.map, {
+          center: {
+            lat: latitude,
+            lng: longitude,
+          },
           zoom: 14,
-          center: myLatLng
         });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
+        new google.maps.Marker({
           map: map,
+          position: {
+            lat: latitude,
+            lng: longitude,
+          },
         });
       });
     },
