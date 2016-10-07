@@ -45,7 +45,7 @@ $duration: 1s;
 
 .c-loader__circle:before {
   animation: spinner $duration infinite ease-in-out both;
-  background-color: darken($gallery, 10);
+  background-color: darken($gallery, 50);
   border-radius: 100%;
   content: '';
   display: block;
