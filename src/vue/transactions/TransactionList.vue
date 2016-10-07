@@ -22,12 +22,12 @@ export default {
   },
   computed: {
     groupedTransactions() {
-      return _.groupBy(this.sortedTransactions, transaction => {
+      return _.groupBy(this.sortedTransactions, (transaction) => {
         return moment(transaction.created).startOf('day').valueOf();
       });
     },
     sortedTransactions() {
-      return _.sortBy(this.transactions.items, transaction => {
+      return _.sortBy(this.transactions.items, (transaction) => {
         return moment(transaction.created).valueOf();
       }).reverse();
     },

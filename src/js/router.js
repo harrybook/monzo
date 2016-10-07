@@ -1,5 +1,3 @@
-'use strict';
-
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Account from '../vue/pages/Account.vue';
@@ -19,7 +17,7 @@ function requireAuth(route, redirect, next) {
     });
   }
 
-  next();
+  return next();
 }
 
 const router = new VueRouter({

@@ -16,14 +16,22 @@ const config = {
     children: false,
   },
   module: {
+    preLoaders: [
+      {
+        test: /.vue$/,
+        loader: 'eslint',
+        exclude: /node_modules/,
+      },
+    ],
+    // but use vue-loader for all *.vue files
     loaders: [
       {
-        test: /\.vue$/,
+        test: /.vue$/,
         loader: 'vue',
       },
       {
-        test: /\.js$/,
-        loader: 'babel',
+        test: /.js$/,
+        loader: 'babel!eslint',
         exclude: /node_modules/,
       },
     ],
