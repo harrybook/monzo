@@ -1,25 +1,17 @@
 <template>
   <div @click.prevent="showTransaction" class="c-transaction-item" :class="classes">
     <div class="c-transaction-item__image">
-      <div class="c-transaction-item__image-container" :style="imageStyle">
-        <span v-if="transaction.is_load">+</span>
-      </div>
+      <transaction-avatar :image="transaction.merchant ? transaction.merchant.logo : ''" />
     </div>
     <div class="c-transaction-item__info">
       <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
       <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.notes }}</div>
-      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">
-        Declined<template v-if="declinedReason">, {{ declinedReason }}</template>
-      </div>
+      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">Declined<template v-if="declinedReason">, {{ declinedReason }}</template></div>
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
-        <div class="c-transaction-item__amount-main">
-          {{ transaction.amount / 100 | currency }}
-        </div>
-        <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">
-          {{ transaction.local_amount / 100 | currency(transaction.local_currency) }}
-        </div>
+        <div class="c-transaction-item__amount-main">{{ transaction.amount / 100 | currency }}</div>
+        <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">{{ transaction.local_amount / 100 | currency(transaction.local_currency) }}</div>
       </div>
     </div>
   </div>
@@ -27,22 +19,17 @@
 
 <script>
 import { currency } from '../../js/filters';
+import TransactionAvatar from './TransactionAvatar.vue';
 
 export default {
+  components: {
+    TransactionAvatar,
+  },
   computed: {
     classes() {
       return {
         'c-transaction-item--top-up': this.transaction.is_load,
         'c-transaction-item--selected': this.currentTransaction.id === this.transaction.id,
-      };
-    },
-    imageStyle() {
-      if (!this.transaction.merchant) {
-        return {};
-      }
-
-      return {
-        backgroundImage: `url(${this.transaction.merchant.logo})`,
       };
     },
     declinedReason() {
@@ -83,7 +70,6 @@ export default {
   methods: {
     showTransaction() {
       this.$store.dispatch('retrieveTransaction', this.transaction.id);
-      // this.$store.commit('transactionsShowPane', true);
     },
   },
   props: {
@@ -121,24 +107,6 @@ export default {
 .c-transaction-item__image {
   line-height: 0;
   padding: 10px 0;
-}
-
-.c-transaction-item__image-container {
-  padding-top: 16px;
-  text-align: center;
-  color: $white;
-  font-size: 20px;
-  display: inline-block;
-  background-color: $gallery;
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
-  background-position: center;
-  background-size: cover;
-
-  .c-transaction-item--top-up & {
-    background-color: $ocean-green;
-  }
 }
 
 .c-transaction-item__info {
