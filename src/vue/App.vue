@@ -35,4 +35,12 @@ a {
 p {
   margin: 0 0 20px;
 }
+
+hr {
+  border-width: 1px 0 0;
+  border: solid $gallery;
+  height: 1px;
+  margin: 30px 0;
+  width: 100%;
+}
 </style>
