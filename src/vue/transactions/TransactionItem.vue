@@ -4,14 +4,24 @@
       <transaction-avatar :image="transaction.merchant ? transaction.merchant.logo : ''" />
     </div>
     <div class="c-transaction-item__info">
-      <div class="c-transaction-item__title u-no-wrap">{{ title }}</div>
-      <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.notes }}</div>
-      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">Declined<template v-if="declinedReason">, {{ declinedReason }}</template></div>
+      <div class="c-transaction-item__title u-no-wrap">
+        {{ title }}
+      </div>
+      <div v-if="transaction.notes" class="c-transaction-item__notes u-no-wrap">
+        {{ transaction.notes }}
+      </div>
+      <div v-else v-if="transaction.decline_reason" class="c-transaction-item__error u-no-wrap">
+        Declined<template v-if="declinedReason">, {{ declinedReason }}</template>
+      </div>
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
-        <div class="c-transaction-item__amount-main">{{ transaction.amount / 100 | currency(transaction.currency) }}</div>
-        <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">{{ transaction.local_amount / 100 | currency(transaction.local_currency) }}</div>
+        <div class="c-transaction-item__amount-main">
+          {{ transaction.amount / 100 | currency(transaction.currency) }}
+        </div>
+        <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">
+          {{ transaction.local_amount / 100 | currency(transaction.local_currency) }}
+        </div>
       </div>
     </div>
   </div>
