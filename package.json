@@ -29,6 +29,7 @@
     "express": "^4.13.3",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
+    "nunjucks": "^2.5.2",
     "superagent": "^2.2.0",
     "vue": "^2.0.1",
     "vue-loader": "^9.5.1",

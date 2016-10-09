@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const nunjucks = require('nunjucks');
 const path = require('path');
 const request = require('superagent');
 const config = require('./config');
@@ -7,6 +8,13 @@ const pkg = require('./package.json');
 
 const app = express();
 const port = process.env.PORT || 2020;
+
+nunjucks.configure(path.resolve(__dirname), {
+  autoescape: true,
+  express: app,
+});
+app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
 
 app.get('/token', (req, res) => {
   const grantType = req.query.grant_type || 'authorization_code';
@@ -32,7 +40,7 @@ app.get('/token', (req, res) => {
 });
 
 app.use('/dist', express.static(path.resolve(__dirname, 'dist')));
-app.use('*', (req, res) => res.sendFile(path.resolve(__dirname, 'index.html')));
+app.use('*', (req, res) => res.render('index', { config }));
 
 http.createServer(app).listen(port);
 
