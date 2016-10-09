@@ -1,6 +1,6 @@
-# monzo
-
-A simple web interface for [Monzo](http://monzo.com).
+<h1 align="center">monzo</h1>
+<p align="center">A simple web interface for [Monzo](http://monzo.com).</p>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1469007/19223488/0566d99e-8e69-11e6-8ef1-67f5f07c2dd6.png" width="700px">
 
 ## Features
 
