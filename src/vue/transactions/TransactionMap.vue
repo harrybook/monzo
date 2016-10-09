@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss">
 .c-transaction-map__map {
-  height: 200px;
+  height: 275px;
   width: 100%;
 }
 </style>

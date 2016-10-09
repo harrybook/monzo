@@ -10,7 +10,7 @@
     </div>
     <div class="c-transaction-item__amount">
       <div class="c-transaction-item__amount-container">
-        <div class="c-transaction-item__amount-main">{{ transaction.amount / 100 | currency }}</div>
+        <div class="c-transaction-item__amount-main">{{ transaction.amount / 100 | currency(transaction.currency) }}</div>
         <div v-if="transaction.local_amount !== transaction.amount" class="c-transaction-item__amount-local">{{ transaction.local_amount / 100 | currency(transaction.local_currency) }}</div>
       </div>
     </div>
