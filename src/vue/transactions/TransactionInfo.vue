@@ -7,21 +7,35 @@
         <div class="c-transaction-info__avatar">
           <transaction-avatar v-if="transaction.data.merchant" :image="transaction.data.merchant.logo" :size="70" />
         </div>
+        <p class="c-transaction-info__created">
+          {{ formatDate(transaction.data.created) }}
+        </p>
         <h1 class="c-transaction-info__heading">{{ title }}</h1>
         <p v-if="transaction.data.merchant" class="c-transaction-info__address">
-          <a :href="'http://maps.google.com/?ll=' + transaction.data.merchant.address.latitude + ',' + transaction.data.merchant.address.longitude" target="_blank">{{ transaction.data.merchant.address.short_formatted }}</a>
+          <a :href="'http://maps.google.com/?ll=' + transaction.data.merchant.address.latitude + ',' + transaction.data.merchant.address.longitude" target="_blank">
+            {{ transaction.data.merchant.address.short_formatted }}
+          </a>
         </p>
-        <div class="c-transaction-info__amount">{{ transaction.data.amount / 100 | currency(transaction.data.currency) }}</div>
-        <div v-if="transaction.data.local_amount !== transaction.data.amount" class="c-transaction-info__amount-local">{{ transaction.data.local_amount / 100 | currency(transaction.data.local_currency) }}</div>
-        <hr>
-        <div v-if="transaction.data.notes" class="c-transaction-item__notes u-no-wrap">{{ transaction.data.notes }}</div>
-        <div v-if="transaction.data.decline_reason" class="c-transaction-item__error u-no-wrap">Declined<template v-if="declinedReason">, {{ declinedReason }}</template></div>
+        <div class="c-transaction-info__amount">
+          {{ transaction.data.amount / 100 | currency(transaction.data.currency) }}
+        </div>
+        <div v-if="transaction.data.local_amount !== transaction.data.amount" class="c-transaction-info__amount-local">
+          {{ transaction.data.local_amount / 100 | currency(transaction.data.local_currency) }}
+        </div>
+        <hr v-if="transaction.data.notes || transaction.data.decline_reason">
+        <div v-if="transaction.data.notes" class="c-transaction-item__notes u-no-wrap">
+          {{ transaction.data.notes }}
+        </div>
+        <div v-if="transaction.data.decline_reason" class="c-transaction-item__error u-no-wrap">
+          Declined<template v-if="declinedReason">, {{ declinedReason }}</template>
+        </div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 import { currency } from '../../js/filters';
 import TransactionAvatar from './TransactionAvatar.vue';
 import TransactionSelect from './TransactionSelect.vue';
@@ -69,6 +83,11 @@ export default {
       return this.transaction.data.description;
     },
   },
+  methods: {
+    formatDate(value) {
+      return moment(value).format('dddd, D MMMM, HH:mm');
+    },
+  },
 };
 </script>
 
@@ -85,6 +104,11 @@ export default {
 
 .c-transaction-info__avatar {
   margin-top: -35px;
+  margin-bottom: 20px;
+}
+
+.c-transaction-info__created {
+  color: $silver;
 }
 
 .c-transaction-info__heading {

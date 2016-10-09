@@ -37,9 +37,8 @@ p {
 }
 
 hr {
-  border-width: 1px 0 0;
-  border: solid $gallery;
-  height: 1px;
+  border: none;
+  border-top: 1px solid $gallery;
   margin: 30px 0;
   width: 100%;
 }
