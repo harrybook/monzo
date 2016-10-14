@@ -25,9 +25,9 @@ app.get('/token', (req, res) => {
     .type('form')
     .send({
       grant_type: grantType,
-      client_id: config.client.id,
-      client_secret: config.client.secret,
-      redirect_uri: config.client.redirectUri,
+      client_id: config.monzo.id,
+      client_secret: config.monzo.secret,
+      redirect_uri: config.monzo.redirectUri,
       [tokenType]: token,
     })
     .end((error, response) => {
