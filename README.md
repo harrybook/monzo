@@ -4,17 +4,35 @@
 
 ## Features
 
-* Simple transaction list-detail view.
+* Simple transaction list view.
 * Google Maps integration.
-* Additional information supported (declines, notes etc).
-* Support for foreign payments.
-* Keeps you logged in using refresh tokens.
+* Additional transaction information (declines, notes etc).
+* Support for foreign payments and currencies.
+* Uses refresh tokens to persist sessions.
 
-## Install
+## Configuration
 
-Whilst Monzo is in beta, you'll need to create an application in [Monzo's developer dashboard](#) to use this application.
+A few steps are required before the application is ready to run.
 
-* Clone this repository.
+Firstly, create an application in [Monzo's developer dashboard](https://developers.monzo.com/) (this is required whilst Monzo is still in beta). Use `http://localhost:2020/callback` as the redirect URL, and set the confidentiality to "confidential". Note down the client ID and client secret.
+
+Secondly, if you want support for Google Maps integration, [get an API key](https://developers.google.com/maps/documentation/javascript/get-api-key) and note this down too.
+
+Lastly, duplicate `config.sample.js` and rename to `config.js`. Update this file with your keys.
+
+## Usage
+
 * Run `npm install`.
-* Rename `config.sample.js` to `config.js` and update with [your keys](#).
+* Run `npm run prod`.
+
+## Development
+
 * Run `npm start`.
+* Run `npm run watch` (separate tab).
+
+## Tasks
+
+* Run accessibility tests and fix issues.
+* Add proper mobile support (transaction modals etc).
+* Improve account list.
+* Improve login button and page design.
